@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=`, initial-scale=1.0">
+  <title>promise</title>
+  <script src="./MyPromise.js"></script>
+</head>
+<body>
+</body>
+</html>
+<script>
+const promise = new MyPromise((resolve, reject) => {
+  /* setTimeout(() => {
+    resolve('success')
+  }, 2000); */
+  resolve('success')
+})
+const promise2 = promise.then(value => {
+  console.log('1')
+  throw new Error('then中错误')
+  return promise2
+})
+promise2.then(val => {
+  console.log('success', val)
+}, val => {
+  console.log('fail', val.message)
+})
+function otherPromise() {
+  return new MyPromise((resolve, reject) => {
+    resolve('other')
+  })
+}
+MyPromise.resolve(1).then(res => {
+  console.log(res)
+})
+/* promise.then(value => {
+  console.log(1)
+  console.log('resolve', value)
+  return  otherPromise()
+}).then(val => {
+  console.log(2)
+  console.log('resolve', val)
+}) */
+
+</script>
